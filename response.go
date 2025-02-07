@@ -13,6 +13,7 @@ type successResponse struct {
 	IsPrime    bool     `json:"is_prime"`
 	IsPerfect  bool     `json:"is_perfect"`
 	Properties []string `json:"properties"`
+	DigitSum   int      `json:"digit_sum"`
 	FunFact    string   `json:"fun_fact"`
 }
 
@@ -43,7 +44,7 @@ func newSuccessResponse(n int) successResponse {
 	response := successResponse{Number: n}
 
 	// Running computations concurrently
-	wg.Add(4)
+	wg.Add(5)
 
 	go func() {
 		defer wg.Done()
@@ -66,6 +67,14 @@ func newSuccessResponse(n int) successResponse {
 		properties := computeProperties(isArmstrong(n), isOdd(n))
 		mu.Lock()
 		response.Properties = properties
+		mu.Unlock()
+	}()
+
+	go func() {
+		defer wg.Done()
+		sum := digitSum(n)
+		mu.Lock()
+		response.DigitSum = sum
 		mu.Unlock()
 	}()
 

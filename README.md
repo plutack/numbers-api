@@ -12,6 +12,11 @@ func computeProperties(isArmstrong bool, isOdd bool) []string
 
     Returns a slice of string with allowed values ["armstrong", "odd", "even"]
 
+func digitSum(n int) int
+    digitSum calculates the sum of the all the digits in the number.
+
+    returns int.
+
 func getFunFact(n int) string
     getFunFact is a function that gets a random math funfact using
     http://numbersapi.com/{n}/math where n is the number.
@@ -66,6 +71,7 @@ type successResponse struct {
 	IsPrime    bool     `json:"is_prime"`
 	IsPerfect  bool     `json:"is_perfect"`
 	Properties []string `json:"properties"`
+	DigitSum   int      `json:"digit_sum"`
 	FunFact    string   `json:"fun_fact"`
 }
     successResponse contains fields for a 200 OK response

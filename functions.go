@@ -48,6 +48,18 @@ func isArmstrong(n int) bool {
 	return original == total
 }
 
+// digitSum calculates  the sum of the all the digits in the number.
+//
+// returns int.
+func digitSum(n int) int {
+	total := 0
+	for temp := n; temp > 0; temp /= 10 {
+		digit := temp % 10
+		total += digit
+	}
+	return total
+}
+
 // isOdd checks if a number is odd.
 //
 // A number is odd if it is not diviisble by 2 without having remainders.
